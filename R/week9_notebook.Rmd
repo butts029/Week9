@@ -1,0 +1,48 @@
+---
+output: html_notebook
+---
+
+# R Studio API
+
+```{r}
+library(rstudioapi)
+setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+```
+
+# Libraries
+
+```{r}
+library(tidyverse)
+library(lubridate)
+```
+
+# Data Import
+
+```{r}
+week9_tbl <- read_csv("../data/week3.csv") %>%
+              mutate(timeStart = ymd_hms(timeStart),
+                     timeEnd = ymd_hms(timeEnd),
+                     condition = factor(condition, 
+                                        levels = c("A", "B", "C"), 
+                                        labels = c("Block A", "Block B", "Control")),
+                     gender = factor(gender, 
+                                     levels = c("M", "F"), 
+                                     labels = c("Male", "Female")),
+                     mean1_5 = (q1 + q2 + q3 + q4 + q5)/5,
+                     mean6_10 = (q6 + q7 + q8 + q9 + q10)/5)
+```
+
+# Data Visualization
+
+```{r}
+p <- ggplot(week9_tbl, aes(x = mean1_5, y  = mean6_10)) +
+      geom_point() +
+      geom_smooth(method = "lm", se = FALSE)
+p
+```
+
+# Analysis
+
+```{r}
+cor.test(week9_tbl$mean1_5, week9_tbl$mean6_10)
+```
