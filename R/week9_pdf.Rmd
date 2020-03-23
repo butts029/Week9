@@ -1,4 +1,7 @@
 ---
+title: 'Week 9 Project'
+author: 'Jessica Butts'
+date: 'Due March 24, 2020'
 output: pdf_document
 knit: (function(inputFile, encoding) {
   rmarkdown::render(inputFile, encoding = encoding, output_dir = "../output") })

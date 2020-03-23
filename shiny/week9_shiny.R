@@ -31,7 +31,7 @@ ui <- fluidPage(
 
 # Define server logic required to draw a histogram
 server <- function(input, output) {
-    week9_tbl <- read_csv("../data/week3.csv") %>%
+    week9_tbl <- read_csv("data/week3.csv") %>%
         mutate(timeStart = ymd_hms(timeStart),
                timeEnd = ymd_hms(timeEnd),
                condition = factor(condition, 
@@ -67,3 +67,5 @@ server <- function(input, output) {
 
 # Run the application 
 shinyApp(ui = ui, server = server)
+
+# https://butts029.shinyapps.io/Week9Project2/ 
